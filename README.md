@@ -134,7 +134,7 @@ Fitness Tracker is a comprehensive web application designed to help users manage
 - **Section Title**: “Exercises” is displayed.
 - **Create Exercises Form**: Allows users to add new exercises.
 - **Exercises List**: Displays all exercises in an organized layout.
-- ![Exercises List](images/exercisesCards.png)   
+- ![Exercises List](setup/images/exercisesCards.png)   
 
 ### Routines Page
 - **Section Title**: “Routines” is displayed.
