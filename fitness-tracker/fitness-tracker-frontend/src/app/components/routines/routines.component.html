@@ -102,9 +102,8 @@
 
   <!-- Edit Routine Modal -->
   <div *ngIf="isEditModalOpen" class="modal-overlay">
-    <div *ngFor="let routine of routines; let i = index" class="col-md-4 mb-4">
     <div class="modal-content">
-      <h4 class="modal-title">Edit Routine #{{ i+1 }}</h4>
+      <h4 class="modal-title">Edit Routine </h4>
       <form (submit)="updateRoutine(); $event.preventDefault()">
         <div class="mb-3">
           <label for="exerciseSelect_edit" class="form-label">Select Exercise</label>
