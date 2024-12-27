@@ -1,0 +1,121 @@
+<div class="container exercises-container mt-5">
+  <!-- Title -->
+  <h2 class="text-center section-title mb-5">Exercises</h2>
+
+  <!-- Create Exercise Form -->
+  <div class="card form-card mb-5">
+    <div class="card-body">
+      <h5 class="card-subtitle mb-4">Create New Exercise</h5>
+      <form (submit)="createExercise(); $event.preventDefault()">
+        <div class="mb-3">
+          <label for="exerciseName" class="form-label">Name</label>
+          <input
+            type="text"
+            id="exerciseName"
+            [(ngModel)]="newExercise.name"
+            name="name"
+            class="form-control"
+            placeholder="Enter exercise name"
+            required />
+        </div>
+        <div class="mb-3">
+          <label for="exerciseDescription" class="form-label">Description</label>
+          <textarea
+            id="exerciseDescription"
+            [(ngModel)]="newExercise.description"
+            name="description"
+            class="form-control"
+            placeholder="Short description of your exercise"
+            required>
+          </textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exerciseCategory" class="form-label">Category</label>
+          <input
+            type="text"
+            id="exerciseCategory"
+            [(ngModel)]="newExercise.category"
+            name="category"
+            class="form-control"
+            placeholder="Category (e.g., Strength, Cardio)"
+            required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Add Exercise</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Exercises List -->
+  <div *ngIf="exercises.length > 0; else noExercises" class="row exercises-list">
+    <div *ngFor="let exercise of exercises" class="col-md-4 mb-4">
+      <div class="card exercise-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ exercise.name }}</h5>
+          <p class="card-text">{{ exercise.description }}</p>
+          <p><strong>Category:</strong> {{ exercise.category }}</p>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-warning btn-sm me-2" (click)="openEditModal(exercise)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteExercise(exercise.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Exercises Message -->
+  <ng-template #noExercises>
+    <div class="no-exercises">
+      <p>No exercises found. Start by adding some!</p>
+    </div>
+  </ng-template>
+
+  <!-- Edit Exercise Modal -->
+  <div class="modal fade show" id="editExerciseModal" tabindex="-1" role="dialog" [style.display]="isEditModalOpen ? 'block' : 'none'" *ngIf="isEditModalOpen">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Exercise</h5>
+          <button type="button" class="btn-close" (click)="closeEditModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="editExerciseName" class="form-label">Name</label>
+              <input
+                type="text"
+                id="editExerciseName"
+                [(ngModel)]="selectedExercise.name"
+                name="editName"
+                class="form-control"
+                required />
+            </div>
+            <div class="mb-3">
+              <label for="editExerciseDescription" class="form-label">Description</label>
+              <textarea
+                id="editExerciseDescription"
+                [(ngModel)]="selectedExercise.description"
+                name="editDescription"
+                class="form-control"
+                required>
+              </textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editExerciseCategory" class="form-label">Category</label>
+              <input
+                type="text"
+                id="editExerciseCategory"
+                [(ngModel)]="selectedExercise.category"
+                name="editCategory"
+                class="form-control"
+                required />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="updateExercise()">Save Changes</button>
+          <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,175 @@
+<div class="container mt-5 routines-container">
+  <!-- Title -->
+  <h2 class="text-center section-title mb-5">Routines</h2>
+
+  <!-- Create Routine Form -->
+  <div class="card form-card mb-5">
+    <div class="card-body">
+      <h5 class="form-card-title">Create New Routine</h5>
+      <form (submit)="createRoutine(); $event.preventDefault()">
+        <div class="mb-3">
+          <label for="exerciseSelect_create" class="form-label">Select Exercise</label>
+          <select
+            id="exerciseSelect_create"
+            [(ngModel)]="newRoutine.exercise_id"
+            name="exercise_id"
+            class="form-control"
+            required
+          >
+            <option *ngFor="let exercise of exercises" [value]="exercise.id">
+              {{ exercise.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="goalSelect_create" class="form-label">Select Goal</label>
+          <select
+            id="goalSelect_create"
+            [(ngModel)]="newRoutine.goal_id"
+            name="goal_id"
+            class="form-control"
+            required
+          >
+            <option *ngFor="let goal of goals" [value]="goal.id">
+              {{ goal.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="sets_create" class="form-label">Sets</label>
+          <input
+            type="number"
+            id="sets_create"
+            [(ngModel)]="newRoutine.sets"
+            name="sets"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="repetitions_create" class="form-label">Repetitions</label>
+          <input
+            type="number"
+            id="repetitions_create"
+            [(ngModel)]="newRoutine.repetitions"
+            name="repetitions"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="duration_create" class="form-label">Duration (in minutes)</label>
+          <input
+            type="number"
+            id="duration_create"
+            [(ngModel)]="newRoutine.duration"
+            name="duration"
+            class="form-control"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Add Routine</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Routine List -->
+  <div *ngIf="routines.length > 0; else noRoutines" class="row">
+    <div *ngFor="let routine of routines; let i = index" class="col-md-4 mb-4">
+      <div class="card routine-card">
+        <div class="card-body">
+          <!-- Usar el índice para mostrar el número de la rutina -->
+          <h5 class="routine-title">Routine #{{ i + 1 }}</h5>
+          <p><strong>Session Date:</strong> {{ routine.session_date | date:'dd-MM-yyyy' }}</p>
+          <p><strong>Exercise:</strong> {{ getExerciseName(routine.exercise_id) }}</p>
+          <p><strong>Goal:</strong> {{ getGoalName(routine.goal_id) }}</p>
+          <p><strong>Sets:</strong> {{ routine.sets }} | <strong>Repetitions:</strong> {{ routine.repetitions }} | <strong>Duration:</strong> {{ routine.duration }} min</p>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-warning btn-sm me-2" (click)="openEditModal(routine)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteRoutine(routine.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Routines Message -->
+  <ng-template #noRoutines>
+    <div class="no-routines">
+      <p>No routines found. Start by adding some!</p>
+    </div>
+  </ng-template>
+
+  <!-- Edit Routine Modal -->
+  <div *ngIf="isEditModalOpen" class="modal-overlay">
+    <div *ngFor="let routine of routines; let i = index" class="col-md-4 mb-4">
+    <div class="modal-content">
+      <h4 class="modal-title">Edit Routine #{{ i+1 }}</h4>
+      <form (submit)="updateRoutine(); $event.preventDefault()">
+        <div class="mb-3">
+          <label for="exerciseSelect_edit" class="form-label">Select Exercise</label>
+          <select
+            id="exerciseSelect_edit"
+            [(ngModel)]="selectedRoutine.exercise_id"
+            name="exercise_id"
+            class="form-control"
+            required
+          >
+            <option *ngFor="let exercise of exercises" [value]="exercise.id">
+              {{ exercise.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="goalSelect_edit" class="form-label">Select Goal</label>
+          <select
+            id="goalSelect_edit"
+            [(ngModel)]="selectedRoutine.goal_id"
+            name="goal_id"
+            class="form-control"
+            required
+          >
+            <option *ngFor="let goal of goals" [value]="goal.id">
+              {{ goal.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="sets_edit" class="form-label">Sets</label>
+          <input
+            type="number"
+            id="sets_edit"
+            [(ngModel)]="selectedRoutine.sets"
+            name="sets"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="repetitions_edit" class="form-label">Repetitions</label>
+          <input
+            type="number"
+            id="repetitions_edit"
+            [(ngModel)]="selectedRoutine.repetitions"
+            name="repetitions"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="duration_edit" class="form-label">Duration (in minutes)</label>
+          <input
+            type="number"
+            id="duration_edit"
+            [(ngModel)]="selectedRoutine.duration"
+            name="duration"
+            class="form-control"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+        <button type="button" class="btn btn-secondary w-100 mt-2" (click)="closeEditModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

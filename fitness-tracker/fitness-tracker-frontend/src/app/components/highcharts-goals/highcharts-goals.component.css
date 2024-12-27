@@ -1,0 +1,18 @@
+/* Highcharts container */
+#highcharts-container {
+  width: 100%;
+  height: 400px;
+  margin: 0 auto; /* Center the chart */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  padding: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #highcharts-container {
+    height: 300px; /* Reduce height for smaller screens */
+  }
+}

@@ -1,0 +1,141 @@
+<div class="container goals-container mt-5">
+  <!-- Title -->
+  <h2 class="text-center section-title mb-5">Goals</h2>
+
+  <!-- Highcharts Goals Chart -->
+  <div class="chart-container mb-5">
+    <app-highcharts-goals></app-highcharts-goals>
+  </div>
+
+  <!-- Create Goal Form -->
+  <div class="card form-card mb-5">
+    <div class="card-body">
+      <h5 class="card-subtitle mb-4">Create New Goal</h5>
+      <form (submit)="createGoal(); $event.preventDefault()">
+        <div class="mb-3">
+          <label for="goalName" class="form-label">Name</label>
+          <input
+            type="text"
+            id="goalName"
+            [(ngModel)]="newGoal.name"
+            name="name"
+            class="form-control"
+            placeholder="Enter goal name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="goalDescription" class="form-label">Description</label>
+          <textarea
+            id="goalDescription"
+            [(ngModel)]="newGoal.description"
+            name="description"
+            class="form-control"
+            placeholder="Short description of your goal"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="goalTargetDate" class="form-label">Target Date</label>
+          <input
+            type="date"
+            id="goalTargetDate"
+            [(ngModel)]="newGoal.targetDate"
+            name="targetDate"
+            class="form-control"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Add Goal</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- AG Grid Goals List -->
+  <div class="ag-grid-container mb-5">
+    <h4 class="text-center mb-4">Detailed Goals List</h4>
+    <app-ag-grid-goals></app-ag-grid-goals>
+  </div>
+
+  <!-- Goals Cards List -->
+  <div *ngIf="goals.length > 0; else noGoals" class="row goals-list">
+    <div *ngFor="let goal of goals" class="col-md-4 mb-4">
+      <div class="card goal-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ goal.name }}</h5>
+          <p><strong>Target Date:</strong> {{ goal.targetdate | date: 'dd-MM-yyyy' }}</p>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-warning btn-sm me-2" (click)="openEditModal(goal)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteGoal(goal.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Goals Message -->
+  <ng-template #noGoals>
+    <div class="no-goals">
+      <p>No goals found. Start by adding some!</p>
+    </div>
+  </ng-template>
+
+  <!-- Edit Goal Modal -->
+  <div
+    class="modal fade show"
+    id="editGoalModal"
+    tabindex="-1"
+    role="dialog"
+    [style.display]="isEditModalOpen ? 'block' : 'none'"
+    *ngIf="isEditModalOpen"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Goal</h5>
+          <button type="button" class="btn-close" (click)="closeEditModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="editGoalName" class="form-label">Name</label>
+              <input
+                type="text"
+                id="editGoalName"
+                [(ngModel)]="selectedGoal.name"
+                name="editName"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="editGoalDescription" class="form-label">Description</label>
+              <textarea
+                id="editGoalDescription"
+                [(ngModel)]="selectedGoal.description"
+                name="editDescription"
+                class="form-control"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editGoalTargetDate" class="form-label">Target Date</label>
+              <input
+                type="date"
+                id="editGoalTargetDate"
+                [(ngModel)]="selectedGoal.targetDate"
+                name="editTargetDate"
+                class="form-control"
+                required
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="updateGoal()">Save Changes</button>
+          <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

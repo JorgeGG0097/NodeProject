@@ -1,0 +1,133 @@
+/* General Background */
+body {
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Title Styling */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ff7f50;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+/* Chart Container */
+.chart-container {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Card */
+.form-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+.form-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* AG Grid Container */
+.ag-grid-container {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Goal Cards */
+.goal-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.goal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.goal-card .card-footer {
+  background-color: #fdfdfd;
+}
+
+/* No Goals Message */
+.no-goals {
+  text-align: center;
+  color: #555;
+  font-size: 1.2rem;
+  padding: 2rem;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.btn-primary {
+  background-color: #ff7f50;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #e66b44;
+}
+.btn-warning {
+  background-color: #f7a541;
+  border: none;
+}
+.btn-warning:hover {
+  background-color: #e59437;
+}
+.btn-danger {
+  background-color: #ff4d4d;
+  border: none;
+}
+.btn-danger:hover {
+  background-color: #e04242;
+}
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+.modal-header {
+  background-color: #ff7f50;
+  color: white;
+}
+.modal-body input,
+.modal-body textarea {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+.modal-body input:focus,
+.modal-body textarea:focus {
+  border-color: #ff7f50;
+  box-shadow: 0 0 5px rgba(255, 127, 80, 0.5);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .goal-card {
+    margin-bottom: 1rem;
+  }
+  .btn {
+    font-size: 0.9rem;
+  }
+}
